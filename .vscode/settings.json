@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+      "**/node_modules": true,
+      "**/postgres_data":true,
+      "**/mysql_data":true
+  }
+}

@@ -8,7 +8,9 @@ const router = express.Router();
 router.post('/login',
   passport.authenticate('local', {session: false}),
   async (req, res, next) => {
-    // Passport agrega user al req
+    // Passport agrega el payload, en este caso 'user' al req
+    // Por tanto todos los middlewares que sean colocados después
+    // podrán ver a 'user'
     try {
       const user = req.user;
       const payload = {

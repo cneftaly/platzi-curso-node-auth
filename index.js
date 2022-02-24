@@ -19,7 +19,8 @@ const options = {
       callback(new Error('no permitido'));
     }
   }
-}
+};
+
 app.use(cors(options));
 require('./utils/auth');
 

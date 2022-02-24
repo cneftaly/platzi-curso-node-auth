@@ -7,20 +7,25 @@ const {
   createOrderSchema,
   addItemSchema
 } = require('../schemas/order.schema');
+const passport = require('passport');
 
 const router = express.Router();
 const service = new OrderService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    const orders = await service.find();
-    res.json(orders);
-  } catch (error) {
-    next(error);
+router.get('/',
+  passport.authenticate('jwt', {session: false}),
+  async (req, res, next) => {
+    try {
+      const orders = await service.find();
+      res.json(orders);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.post('/',
+  passport.authenticate('jwt', {session: false}),
   validatorHandler(createOrderSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -34,6 +39,7 @@ router.post('/',
 );
 
 router.post('/add-item',
+  passport.authenticate('jwt', {session: false}),
   validatorHandler(addItemSchema, 'body'),
   async(req, res, next) => {
     try {
@@ -47,6 +53,7 @@ router.post('/add-item',
 );
 
 router.get('/:id',
+  passport.authenticate('jwt', {session: false}),
   validatorHandler(getOrderSchema, 'params'),
   async (req, res, next) => {
     try {

@@ -12,7 +12,7 @@ async function sendMail() {
         user: config.emailUser,
         pass: config.emailPassword
     }
-});
+  });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
